@@ -77,3 +77,48 @@
     padding-right: 40px; /* space for the toggle button */
 }
 
+.toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.forgot-password {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+ .forgot-password:hover {
+    text-decoration: underline;
+ }
+ 
+ /*sign in button*/
+.signIn-btn {
+    width: 100%;
+   border: none;
+   border-radius: 10px;
+   font-size: 16px;
+   font-weight: 600;
+   cursor: pointer;
+    padding: 12px 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: linear-gradient(135deg, #667eea, #764ba2 100%);
+    color: white;
+}
+
+.signIn-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+}
+
+.signIn-btn:active {
+    transform: translateY(0);
+}
