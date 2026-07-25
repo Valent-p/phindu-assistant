@@ -40,5 +40,23 @@ function Login() {
                                 required
                             />
                         </div>
-        
+
+                        //password input
+                        <div className = "input-group">
+                            <label>Password</label>
+                            <div className="password-wrapper">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        )
     }
