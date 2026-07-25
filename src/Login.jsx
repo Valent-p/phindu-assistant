@@ -2,36 +2,39 @@ import React, { useState } from 'react'
 import './Login.css'
 
 function Login() {
-    // constants for email and password state
+  // constants for email and password state
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
-    // Managing form submission
+     //anaging form submission
     const handleSubmit = (e) => {
         e.preventDefault()
-        // Handle login logic here
+
+        {/*Handle login logic here*/}
 
         console.log('Email: ', email)
         console.log('Password: ', password)
         alert('Login button clicked check for details')
 
+    }
+
         return (
             <div className="login-container">
                 <div className="login-box">
 
-                    //Header part
+                    {/* Header part */}
                     <div className= "logo">logo</div>
                     <h1>Welcome to Phindu Assistance</h1>
 
-                    <P>Your personal Phindu assistance suite is ready for you</P>
+                    <p>Your personal Phindu assistance suite is ready for you</p>
                     </div>
 
-                    //Submission form
+                    {/* Submission form */}
                     <form onSubmit={handleSubmit}>
 
                         <div className="input-group">
-                            <label>Email Adress</label>
+                            <label>Email Address</label>
                             <input
                                 type="email"
                                 placeholder="Enter your email"
@@ -41,7 +44,7 @@ function Login() {
                             />
                         </div>
 
-                        //password input
+                        {/*password input*/}
                         <div className = "input-group">
                             <label>Password</label>
                             <div className="password-wrapper">
@@ -63,46 +66,42 @@ function Login() {
                         </button>
                     </div>
 
-                    //handling forgot password option
+                    {/*handling forgot password option*/}
                     <div className="forgot-password">
                         <a href="#">Forgot Password?</a>
                     </div>
 
-                    //sign in button
+                    {/*sign in button*/}
                     <button type="submit" className="signIn-btn">Sign In</button>
 
                     </form>
 
-                    //other sign up options
+                    {/*other sign up options*/}
                     <div className="other-options">
                         <p>Or continue with</p>
 
                     </div>
 
-                    //option for signing up with google
+                    {/*option for signing up with google*/}
                     <div className="google-login">
                         <button className="google-btn">
                         <span className="google-icon">G</span>
                         Google
                         </button>
 
-                    //option for signing up with facebook
+                    {/*option for signing up with facebook*/}
                     <button className="facebook-btn">
                         <span className="facebook-icon">F</span>
                         Facebook
                     </button>
                     </div>
 
-                    //link for creating a new account
+                    {/*link for creating a new account*/}
                     <div className="create-account">Don't have an account? <a href="#">Create Account</a></div>
-                    </div> 
-
-
+                    
                 </div>
-            </div>
-
+                
         )
-
     }
 
     export default Login
