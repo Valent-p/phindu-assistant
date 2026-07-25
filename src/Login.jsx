@@ -54,6 +54,15 @@ function Login() {
                             />
                         </div>
 
+                        <button 
+                        type="button"
+                        className="toggle-btn"
+                        onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? "Hide" : "Show"}
+                        </button>
+                    </div>
+
                     </form>
 
                 </div>
