@@ -6,3 +6,10 @@ function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+
+    // Managing form submission
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        // Handle login logic here
+        
+    }
