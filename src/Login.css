@@ -1,14 +1,14 @@
 /*main container for the login page*/
-.login-container {
+/*.login-container {
     min-height: 100vh;
     justify-content: center;
     align-items: center;
     background-color: linear-gradient(135deg, #667eea, #764ba2 100%);
-    padding: 20px;
+    margin-top: 50x;
 }
 
 /*white card box for the login form*/
-.login-box {
+/*.login-box {
     background-color: white;
     padding: 40px 35px;
     border-radius: 20px;
@@ -20,12 +20,12 @@
 /*heading for the login form*/
 .header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 .logo {
     font-size: 50px;
-    margin-bottom: 10px;
+    margin-top: 30px;
 }
 
 .header1 {
