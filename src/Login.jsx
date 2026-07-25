@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import './Login.css'
 
 function Login() {
-    // constants for username and password state
-  const [username, setUsername] = useState('')
+    // constants for email and password state
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
