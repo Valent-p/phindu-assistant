@@ -52,3 +52,28 @@
     font-weight: bold;
     color: #333;
 }
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: #667eea;
+    outline: none;
+}
+
+/*password toggle button*/
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 40px; /* space for the toggle button */
+}
+
