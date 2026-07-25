@@ -1,0 +1,54 @@
+/*main container for the login page*/
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: linear-gradient(135deg, #667eea, #764ba2 100%);
+    padding: 20px;
+}
+
+/*white card box for the login form*/
+.login-box {
+    background-color: white;
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 2px 60px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+}
+
+/*heading for the login form*/
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.header1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.headerp {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/*input fields for the login form*/
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+}
