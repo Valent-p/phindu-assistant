@@ -25,7 +25,9 @@ function Login() {
 
                     {/* Header part */}
                     <div className='header'>
-                    <div className= "logo">logo</div>
+                    <div className= "logo">
+                        <image src= {logo} alt= "logo"></image>
+                    </div>
                     <h1 id = "header1">Welcome to Phindu Assistance</h1>
 
                     <p id = "headerp">Your personal Phindu assistance <br></br>suite is ready for you</p>
