@@ -1,0 +1,92 @@
+# Functions and classes to get or set user data in the database
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from ..core.security import (
+    create_access_token,
+    decode_access_token,
+    hash_password,
+    verify_password,
+)
+from ..models.user import User
+from ..schemas.user import Token, UserRegister
+from .database import get_db
+
+# 1. Define OAuth2 Scheme first
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+
+
+# Define get_current_user (so it's fully defined for all endpoints)
+async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
+    db: AsyncSession = Depends(get_db)
+
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+    payload = decode_access_token(token)
+    if not payload:
+        raise credentials_exception
+
+    user_id_str: str | None = payload.get("sub")
+    if not user_id_str:
+        raise credentials_exception
+
+    try:
+        user_id = int(user_id_str)
+    except ValueError:
+        raise credentials_exception
+
+    stmt = select(User).where(User.id == user_id)
+    result = await db.execute(stmt)
+    user = result.scalar_one_or_none()
+
+    if not user:
+        raise credentials_exception
+
+    return user
+
+
+async def register(payload: UserRegister) -> Token:
+    db: AsyncSession = Depends(get_db)
+
+    stmt = select(User).where(User.username == payload.username)
+    result = await db.execute(stmt)
+    if result.scalar_one_or_none():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Username already exists",
+        )
+
+    hashed = hash_password(payload.password)
+    new_user = User(username=payload.username, hashed_password=hashed)
+
+    db.add(new_user)
+    await db.commit()
+    await db.refresh(new_user)
+
+    access_token = create_access_token(data={"sub": str(new_user.id)})
+    return Token(access_token=access_token, token_type="bearer")
+
+
+# OAuth2PasswordRequestForm parses 'username' and 'password' fields from the form
+async def login(form_data: OAuth2PasswordRequestForm = Depends()) -> Token:
+    db: AsyncSession = Depends(get_db)
+
+    stmt = select(User).where(User.username == form_data.username)
+
+    result = await db.execute(stmt)
+    user = result.scalar_one_or_none()
+
+    if not user or not verify_password(form_data.password, user.hashed_password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid username or password",
+        )
+
+    access_token = create_access_token(data={"sub": str(user.id)})
+    return Token(access_token=access_token, token_type="bearer")
