@@ -71,8 +71,28 @@ function Login() {
                     //sign in button
                     <button type="submit" className="signIn-btn">Sign In</button>
 
-
                     </form>
+
+                    //other sign up options
+                    <div className="other-options">
+                        <p>Or continue with</p>
+
+                    </div>
+
+                    //option for signing up with google
+                    <div className="google-login">
+                        <button className="google-btn">
+                        <span className="google-icon">G</span>
+                        Google
+                        </button>
+
+                    //option for signing up with facebook
+                    <button className="facebook-btn">
+                        <span className="facebook-icon">F</span>
+                        Facebook
+                    </button>
+                    </div>
+
 
                 </div>
             </div>
