@@ -19,8 +19,9 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 
 # Define get_current_user (so it's fully defined for all endpoints)
-async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
-    db: AsyncSession = Depends(get_db)
+async def get_current_user(
+    token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)
+) -> User:
 
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -51,9 +52,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
     return user
 
 
-async def register(payload: UserRegister) -> Token:
-    db: AsyncSession = Depends(get_db)
-
+async def register(payload: UserRegister, db: AsyncSession) -> Token:
     stmt = select(User).where(User.username == payload.username)
     result = await db.execute(stmt)
     if result.scalar_one_or_none():
@@ -63,7 +62,11 @@ async def register(payload: UserRegister) -> Token:
         )
 
     hashed = hash_password(payload.password)
-    new_user = User(username=payload.username, hashed_password=hashed)
+    new_user = User(
+        username=payload.username,
+        email=payload.email,
+        hashed_password=hashed,
+    )
 
     db.add(new_user)
     await db.commit()
@@ -74,8 +77,9 @@ async def register(payload: UserRegister) -> Token:
 
 
 # OAuth2PasswordRequestForm parses 'username' and 'password' fields from the form
-async def login(form_data: OAuth2PasswordRequestForm = Depends()) -> Token:
-    db: AsyncSession = Depends(get_db)
+async def login(
+    form_data: OAuth2PasswordRequestForm, db: AsyncSession
+) -> Token:
 
     stmt = select(User).where(User.username == form_data.username)
 
