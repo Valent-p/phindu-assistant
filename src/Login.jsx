@@ -11,5 +11,9 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault()
         // Handle login logic here
+
+        console.log('Email: ', email)
+        console.log('Password: ', password)
+        alert('Login button clicked check for details')
         
     }
