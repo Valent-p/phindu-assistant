@@ -68,7 +68,9 @@ function Login() {
                         <a href="#">Forgot Password?</a>
                     </div>
 
-                    
+                    //sign in button
+                    <button type="submit" className="signIn-btn">Sign In</button>
+
 
                     </form>
 
