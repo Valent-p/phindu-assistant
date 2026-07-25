@@ -122,3 +122,12 @@
 .signIn-btn:active {
     transform: translateY(0);
 }
+
+/*other sign up options*/
+.other-options {
+    text-align: center;
+    margin: 20px 0;
+    margin: 25px 0 15px 0;
+}   
+
+.di
