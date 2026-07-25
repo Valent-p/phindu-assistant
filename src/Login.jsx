@@ -63,6 +63,13 @@ function Login() {
                         </button>
                     </div>
 
+                    //handling forgot password option
+                    <div className="forgot-password">
+                        <a href="#">Forgot Password?</a>
+                    </div>
+
+                    
+
                     </form>
 
                 </div>
