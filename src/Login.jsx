@@ -55,7 +55,7 @@ function Login() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
-                        </div>
+                        
 
                         <button 
                         type="button"
@@ -64,6 +64,9 @@ function Login() {
                         >
                             {showPassword ? "Hide" : "Show"}
                         </button>
+
+                       </div>
+
                     </div>
 
                     {/*handling forgot password option*/}
