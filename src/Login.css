@@ -1,7 +1,6 @@
 /*main container for the login page*/
 .login-container {
     min-height: 100vh;
-    /*display: flex;*/
     justify-content: center;
     align-items: center;
     background-color: linear-gradient(135deg, #667eea, #764ba2 100%);
@@ -86,8 +85,8 @@
     border: none;
     cursor: pointer;
     font-size: 14px;
-    /*padding: 5px;*/
     align-items: left;
+    font-weight: bold;
 }
 
 .forgot-password {
