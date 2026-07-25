@@ -21,23 +21,25 @@
 .header {
     text-align: center;
     margin-top: 30px;
+    margin-bottom: 90px;
 }
 
 .logo {
     font-size: 50px;
-    margin-top: 30px;
+    margin-top: 60px;
 }
 
 .header1 {
     font-size: 24px;
     color: #333;
-    margin-bottom: 8px;
+    margin-top: 8px;
 }
 
 .headerp {
     color: #666;
     font-size: 14px;
     line-height: 1.5;
+    margin-top: 40px;
 }
 
 /*input fields for the login form*/
