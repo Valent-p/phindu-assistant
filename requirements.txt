@@ -1,0 +1,23 @@
+fastapi >= 0.139.0
+pydantic >= 2.3.0
+pydantic-settings >= 2.11.0
+pydantic[email]>=2.3.0
+
+uvicorn[standard] >= 0.50.0
+
+sqlalchemy >= 2.0.51
+alembic >= 1.18.5
+aiosqlite >= 0.22.1
+
+pwdlib[argon2] >= 0.3.0
+
+pyjwt >= 2.13.0
+python-multipart >= 0.0.32
+
+pytest-asyncio >= 0.23.0
+
+opensimplex>=0.4.5
+
+pyrefly
+
+ruff
