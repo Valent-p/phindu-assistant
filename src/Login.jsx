@@ -27,6 +27,18 @@ function Login() {
                     <P>Your personal Phindu assistance suite is ready for you</P>
                     </div>
 
-                    
+                    //Submission form
+                    <form onSubmit={handleSubmit}>
+
+                        <div className="input-group">
+                            <label>Email Adress</label>
+                            <input
+                                type="email"
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
         
     }
