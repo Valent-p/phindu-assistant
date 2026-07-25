@@ -93,8 +93,14 @@ function Login() {
                     </button>
                     </div>
 
+                    //link for creating a new account
+                    <div className="create-account">Don't have an account? <a href="#">Create Account</a></div>
+                    </div> 
+
 
                 </div>
             </div>
+
         )
+        
     }
