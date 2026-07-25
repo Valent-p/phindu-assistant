@@ -181,3 +181,40 @@
     text-decoration: none;
     font-weight: 500;
 }
+
+.create-account a:hover {
+    text-decoration: underline;
+}
+
+.create-account a:active {
+    color: #764ba2;
+}
+
+/*responsive design for smaller screens*/
+@media (max-width: 480px) {
+    .login-box {
+        padding: 30px 20px;
+    }
+
+    .header1 {
+        font-size: 20px;
+    }
+
+    .headerp {
+        font-size: 13px;
+    }
+
+    .input-group input {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .signIn-btn {
+        padding: 10px 0;
+        font-size: 15px;
+    }
+
+    .other-options span {
+        font-size: 12px;
+    }
+}
