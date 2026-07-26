@@ -472,15 +472,19 @@ The interface design covers the primary screens a user interacts with throughout
    
 **16.2 Dashboard page**
 The dashboard provides a summary of daily transactions and overall business performance.
+
 ![Dashboard view showing daily transactions](images/Dashboard.png)
 **16.3 Transaction history page**
 Users can review a detailed log of past transactions.
+
 ![Transaction history screen](images/Transaction.png)
 **16.4 Reports page**
 Generated reports summarize financial performance over a selected period.
+
 ![Sample report view](images/Report.png)
 **16.5 Settings page**
 Users can manage account and business preferences here.
+
 ![Settings screen](images/Settings.png)
 **16.6 Business Insights**
  The insights view highlights key performance trends. ![Business insights dashboard](images/business_insights.png) 
