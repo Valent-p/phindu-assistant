@@ -1,5 +1,7 @@
-﻿## FINOVATE HACKATHON PROJECT DOCUMENTATION
-   Voice-enabled Financial Record Management System for Small Business**
+﻿## **FINOVATE HACKATHON PROJECT DOCUMENTATION
+
+   **
+   **Voice-enabled Financial Record Management System for Small Business**
    
    **Team Name:** Vonapex 
    **Hackathon:** National Virtual hackathon for Financial Innovation in Malawi 2026
@@ -277,7 +279,7 @@ This design allows efficient storage and retrieval of business data while avoidi
 
 ## c . Database Tables 
 
-## 3.1 Users Table
+## 15.1 Users Table
 
 **Description**
 The **Users** table stores information related to registered users of the application. Each record represents a unique business owner or authorized user of the system.
@@ -309,7 +311,7 @@ This table is responsible for:
 |---|---|---|---|
 | 1 | Nelson | nelson@example.com | 2026-07-01 10:30:00 |
 
-## 3.2 Products Table
+## 15.2 Products Table
 
 **Description**
 
@@ -341,7 +343,7 @@ SQL
 products.user_id → users.id
 
 
-## 3.3 Product Instances Table
+## 15.3 Product Instances Table
 
 **Description**
 
@@ -461,41 +463,66 @@ erDiagram
         string notes
     }
 ```
-
-## 4.4 Voice Processing Workflow
-
-C
-
 ## 16. User Interface Design
 
-The interface design covers the primary screens a user interacts with throughout the application. Screenshots should be included for:
+The interface design covers the primary screens a user interacts with throughout the application. 
 
-## 16.1 Login page.
-
-   Registration.
--   Dashboard.
--   Voice recording screen.
--   Transaction history.
--   Reports.
--   User profile
+**16.1 Login page**. 
+![Login view showing daily login](images/login.png)
+   
+**16.2 Dashboard page**
+The dashboard provides a summary of daily transactions and overall business performance.
+![Dashboard view showing daily transactions](images/Dashboard.png)
+**16.3 Transaction history page**
+Users can review a detailed log of past transactions.
+![Transaction history screen](images/Transaction.png)
+**16.4 Reports page**
+Generated reports summarize financial performance over a selected period.
+![Sample report view](images/Report.png)
+**16.5 Settings page**
+Users can manage account and business preferences here.
+![Settings screen](images/Settings.png)
+**16.6 Business Insights**
+ The insights view highlights key performance trends. ![Business insights dashboard](images/business_insights.png) 
 
 ## 17. AI and Voice Processing
-
-The application captures spoken input directly from users during the transaction recording process.
+The main purpose of the system is to simplify financial record management for small business owners through voice interaction.
+Instead of manually entering transactions, users can speak naturally and the system con**verts their speech into structured financial records. 
 
 Speech recognition converts the audio into text, which is then processed using Natural Language Processing to identify key details, including:
-
 -   Product names.
 -   Quantities.
 -   Prices.
--   Dates.
+-   Dates
 
 Once identified, this structured information is stored automatically, eliminating the need for manual entry.
+## 17.1 Voice Input Process
+The voice processing workflow consists of the following stages:
+**17.2 Voice Input**
+Example:
+User says:
+"Sold 10 bottles of water at 500 kwacha each"
 
+**17.3 Speech-to-Text Conversion**
+Audio:
+"Voice Recording"
+
+Converted into:
+"Sold 10 bottles of water at 500 kwacha each"
+
+**17.4 Information Extraction**
+The system identifies:
+| Information      | Extracted Value |
+| ---------------- | --------------- |
+| Product           | Water            |
+| Quantity          | 10               |
+| Unit Price        | 500              |
+| Transaction Type  | Sale             |
+**17.2 System Workflow**
+The following diagram illustrates the flow from voice input to generated report:
+![System workflow diagram](images/Flow_chat.png)
 ## 18. Security Considerations
-
 To protect user data and maintain trust, the system incorporates the following security measures:
-
 -   Password encryption.
 -   Secure authentication.
 -   User authorization controls.
@@ -572,24 +599,41 @@ The project was completed through the collaborative effort of team members acros
 -   UI/UX Design.
 -   Frontend Development.
 -   Backend Development.
--   Artificial Intelligence.
--   Database Design.
--   Testing.
--   Presentation.
+
+_(Fill in team member names against each role above.)_
 
 ## 26. Conclusion
 
 This project demonstrates how artificial intelligence and speech recognition can simplify financial record keeping for small businesses. By reducing manual data entry and improving accessibility, the platform empowers entrepreneurs to make informed financial decisions while promoting financial inclusion across Malawi's informal business sector.
 
 ## 27. References
-
 The following types of sources should be cited to support the project's technical and contextual claims:
 
--   Academic journals.
--   Official documentation for tools and frameworks used.
--   Speech recognition API documentation.
--   Artificial intelligence research papers.
--   Financial inclusion reports relevant to Malawi and the region.
+1. OpenAI. (2024). [*Whisper: Robust Speech Recognition via Large-Scale Weak Supervision*](https://openai.com/research/whisper)
+
+2. FastAPI. (2026). [*FastAPI Documentation*](https://fastapi.tiangolo.com/)
+
+3. React. (2026). [*React Documentation*](https://react.dev/)
+
+4. Flutter. (2026). [*Flutter Documentation*](https://docs.flutter.dev/)
+
+5. PostgreSQL Global Development Group. (2026). [*PostgreSQL Documentation*](https://www.postgresql.org/docs/)
+
+6. Firebase. (2026). [*Firebase Documentation*](https://firebase.google.com/docs)
+
+7. Amazon Web Services. (2026). [*AWS Documentation*](https://docs.aws.amazon.com/)
+
+8. GitHub. (2026). [*GitHub Docs*](https://docs.github.com/)
+
+9. Reserve Bank of Malawi. (2025). [*Financial Inclusion Report*](https://www.rbm.mw/)
+
+10. GSMA. (2024). [*State of the Industry Report on Mobile Money*](https://www.gsma.com/mobilefordevelopment/)
+
+11. World Bank. (2023). [*Financial Inclusion in Sub-Saharan Africa*](https://www.worldbank.org/en/topic/financialinclusion)
+
+12. Mazibuko, C. (2023). [*Challenges and prospects faced by small medium enterprises (SMEs) in terms of growth and development (case study of Lilongwe district, Malawi)*](https://ijhssm.org/issue_dcp/Challenges%20and%20prospects%20faced%20by%20small%20medium%20enterprises%20(SMES)%20in%20terms%20of%20growth%20and%20development%20(case%20study%20of%20Lilongwe%20district,%20Malawi).pdf). International Journal of Humanities Social Science and Management (IJHSSM), 3(2), 962–965.
+
+13. Trade, Investment, and Private Sector Development Partners (TIPDeP). (2024, October 4). [*Micro, Small and Medium Enterprises in Malawi: Sector brief*](https://docs.dcafs-tipdep-donors-mw.org/dt_docs/MSME_Brief_TIPDeP_October_2024_TIPDeP.pdf)
 
 ## 28. Appendices
 
