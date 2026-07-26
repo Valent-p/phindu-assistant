@@ -9,11 +9,12 @@ yarn-debug.log*
 *.db
 *.db-shm
 *.db-wal
-.env
+
 .venv
 .ruff_cache
-.venv
 
+# Environment files
+.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
