@@ -1,7 +1,5 @@
-﻿## **FINOVATE HACKATHON PROJECT DOCUMENTATION
-
-   **
-   **Voice-enabled Financial Record Management System for Small Business**
+﻿## FINOVATE HACKATHON PROJECT DOCUMENTATION
+   Voice-enabled Financial Record Management System for Small Business**
    
    **Team Name:** Vonapex 
    **Hackathon:** National Virtual hackathon for Financial Innovation in Malawi 2026
@@ -578,8 +576,6 @@ The project was completed through the collaborative effort of team members acros
 -   Database Design.
 -   Testing.
 -   Presentation.
-
-_(Fill in team member names against each role above.)_
 
 ## 26. Conclusion
 

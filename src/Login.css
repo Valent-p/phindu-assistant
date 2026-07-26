@@ -1,0 +1,222 @@
+/*main container for the login page*/
+/*.login-container {
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: linear-gradient(135deg, #667eea, #764ba2 100%);
+    margin-top: 50x;
+}
+
+/*white card box for the login form*/
+/*.login-box {
+    background-color: white;
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 2px 60px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+}
+
+/*heading for the login form*/
+.header {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 90px;
+}
+
+.logo {
+    font-size: 50px;
+    margin-top: 60px;
+}
+
+.header1 {
+    font-size: 24px;
+    color: #333;
+    margin-top: 8px;
+}
+
+.headerp {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 40px;
+}
+
+/*input fields for the login form*/
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: #667eea;
+    outline: none;
+}
+
+/*password toggle button*/
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 40px; /* space for the toggle button */
+}
+
+.toggle-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    align-items: left;
+    font-weight: bold;
+}
+
+.forgot-password {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+ .forgot-password:hover {
+    text-decoration: underline;
+ }
+ 
+ /*sign in button*/
+.signIn-btn {
+    width: 100%;
+   border: none;
+   border-radius: 10px;
+   font-size: 16px;
+   font-weight: 600;
+   cursor: pointer;
+    padding: 12px 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: linear-gradient(135deg, #764ba2 100%);
+    color: white;
+}
+
+.signIn-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+}
+
+.signIn-btn:active {
+    transform: translateY(0);
+}
+
+/*other sign up options*/
+.other-options {
+    text-align: center;
+    margin: 20px 0;
+    margin: 25px 0 15px 0;
+}   
+
+.other-options::before, .other-options::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+}
+
+.other-options span {
+  padding: 0 15px;
+  color: #888;
+  font-size: 13px;
+}
+
+/*option for signing up with google*/
+.google-login, .facebook-login {
+    display: flex;
+    justify-content: space-between;
+    gap: 200px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    padding: 12px;
+    cursor: pointer;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.google-login:hover, .facebook-login:hover {
+    background: #f0f0f0;
+}
+
+.google-icon, .facebook-icon {
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+/*link for creating a new account*/
+.create-account {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.create-account a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.create-account a:hover {
+    text-decoration: underline;
+}
+
+.create-account a:active {
+    color: #764ba2;
+}
+
+/*responsive design for smaller screens*/
+@media (max-width: 480px) {
+    .login-box {
+        padding: 30px 20px;
+    }
+
+    .header1 {
+        font-size: 20px;
+    }
+
+    .headerp {
+        font-size: 13px;
+    }
+
+    .input-group input {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .signIn-btn {
+        padding: 10px 0;
+        font-size: 15px;
+    }
+
+    .other-options span {
+        font-size: 12px;
+    }
+}
