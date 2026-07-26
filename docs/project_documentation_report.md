@@ -600,8 +600,6 @@ The project was completed through the collaborative effort of team members acros
 -   Frontend Development.
 -   Backend Development.
 
-_(Fill in team member names against each role above.)_
-
 ## 26. Conclusion
 
 This project demonstrates how artificial intelligence and speech recognition can simplify financial record keeping for small businesses. By reducing manual data entry and improving accessibility, the platform empowers entrepreneurs to make informed financial decisions while promoting financial inclusion across Malawi's informal business sector.
