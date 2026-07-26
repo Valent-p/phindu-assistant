@@ -1,0 +1,422 @@
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#ebb2ff",
+            "surface-container-low": "#f7f2fc",
+            "primary-fixed": "#e5deff",
+            "inverse-surface": "#312f37",
+            "secondary-fixed": "#d4e3ff",
+            "outline-variant": "#c9c4d5",
+            "surface-container-highest": "#e5e1eb",
+            "surface": "#fcf8ff",
+            "primary": "#5140b3",
+            "on-tertiary-container": "#fce6ff",
+            "on-secondary": "#ffffff",
+            "on-secondary-fixed-variant": "#004884",
+            "secondary-fixed-dim": "#a4c9ff",
+            "outline": "#787584",
+            "surface-container-high": "#ebe6f1",
+            "tertiary-fixed": "#f8d8ff",
+            "surface-bright": "#fcf8ff",
+            "on-surface-variant": "#474553",
+            "secondary": "#005fac",
+            "on-surface": "#1c1b22",
+            "secondary-container": "#65a8fd",
+            "surface-tint": "#5d4cbf",
+            "on-tertiary-fixed": "#320047",
+            "tertiary-container": "#9150ac",
+            "on-primary-fixed": "#190064",
+            "background": "#fcf8ff",
+            "on-tertiary-fixed-variant": "#692984",
+            "primary-fixed-dim": "#c8bfff",
+            "on-error": "#ffffff",
+            "inverse-on-surface": "#f4eff9",
+            "tertiary": "#763792",
+            "error": "#ba1a1a",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "surface-variant": "#e5e1eb",
+            "primary-container": "#6a5acd",
+            "on-secondary-container": "#003c70",
+            "on-background": "#1c1b22",
+            "error-container": "#ffdad6",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#f0ebff",
+            "on-primary-fixed-variant": "#4532a6",
+            "surface-container": "#f1ecf6",
+            "surface-container-lowest": "#ffffff",
+            "surface-dim": "#ddd8e2",
+            "on-secondary-fixed": "#001c39",
+            "inverse-primary": "#c8bfff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "sm": "8px",
+            "2xl": "48px",
+            "xs": "4px",
+            "margin": "20px",
+            "xl": "32px",
+            "md": "16px",
+            "gutter": "16px",
+            "lg": "24px",
+            "base": "4px"
+          },
+          "fontFamily": {
+            "label-md": ["Manrope"],
+            "body-lg": ["Manrope"],
+            "headline-md": ["Manrope"],
+            "title-lg": ["Manrope"],
+            "headline-lg-mobile": ["Manrope"],
+            "body-md": ["Manrope"],
+            "headline-lg": ["Manrope"],
+            "display-lg": ["Manrope"]
+          },
+          "fontSize": {
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "title-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg": ["34px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    @layer base {
+      body {
+        overscroll-behavior: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+      main {
+        min-height: 100vh;
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    body {
+      min-height: max(884px, 100dvh);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-background font-body-md text-on-background">
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
+<div class="h-16 px-margin flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<img alt="Phindu Assistance Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDagdFWjsrDySS2bQsL-c5xDVeX-rnN6NfUUIzodyXdXkXmxE-pSD9v9R8pOFmSDQ3t_RUuwGTIYhf9QQcM_UmL7YS1KPQVhVGmttXfxJJuAG_0IkSIqdorqh5IxDyobzKJOMy4v5U9yEWlXMHEXTV0CEeZQPynvAHjZwyvQkeGWxfadtu2Qz-MXVwK4PQR9fs47Au_OMoruRPVbmhoKZXf6OvgNOtPmn8tJllCUrsWq-Wl8xbo4htYIQ-_LCgS-YThDA3EqrD0y_Q"/>
+<span class="font-title-lg text-title-lg text-primary">Phindu</span>
+</div>
+<div class="flex items-center gap-md">
+<span class="hidden sm:block font-label-md text-label-md text-on-surface-variant">Reports</span>
+<img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB039kMpdgxwl6x-OM01tS-um73R-akk4lC_vNmv-uu-NFTSzAS5V-UIs34EJEFZbi3OWHzaBqZgc0lrq8nQl11-_7A4w66n81Ju5VTopp36Flv9jimmoVh8-6qZt5u3yC51WhUF1PIqBf5CGWR4A1a89Nd9ysAS9YZ5QxdUeoP3hqBIW2p-CAcwalnXgeLUl8CdvYczGPueW51k0JBK9Q0chGSDZDFNJa6cQrvAPeVyTKn3aOUENdYTTEOblod21K5ggEPsY1bQyQ"/>
+</div>
+</div>
+</header>
+<main class="relative w-full pt-16 bg-background">
+<div class="flex flex-col w-full">
+<!-- Interactive Header & Date Filter -->
+<div class="px-margin mb-lg flex flex-col gap-sm">
+<div class="flex items-center justify-between pt-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Performance Overview</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Analytics Dashboard</h2>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high transition-all active:scale-95 text-primary" id="themeToggle">
+<span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+</button>
+</div>
+<div class="flex gap-sm overflow-x-auto pb-2 -mx-margin px-margin no-scrollbar">
+<button class="px-md py-2 rounded-full bg-primary text-on-primary font-label-md whitespace-nowrap">Last 30 Days</button>
+<button class="px-md py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md whitespace-nowrap">Quarterly</button>
+<button class="px-md py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md whitespace-nowrap">Year to Date</button>
+<button class="px-md py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md whitespace-nowrap flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span> Custom
+          </button>
+</div>
+</div>
+<!-- NEW: Business Health Summary Card -->
+<div class="px-margin mb-lg">
+<div class="bg-primary p-lg rounded-2xl text-on-primary relative overflow-hidden shadow-md">
+<div class="flex items-start justify-between relative z-10">
+<div class="flex flex-col gap-xs">
+<span class="font-label-md opacity-80">Business Health</span>
+<h3 class="font-headline-md leading-tight">Your business is thriving this month.</h3>
+<p class="font-body-md opacity-90 mt-1">Sales are 15% above target and your average margin has improved significantly since August.</p>
+</div>
+<div class="bg-on-primary/20 p-2 rounded-full">
+<span class="material-symbols-outlined text-[24px]">favorite</span>
+</div>
+</div>
+<!-- Decorative element -->
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+</div>
+</div>
+<!-- Key Metrics Bento Grid -->
+<div class="px-margin grid grid-cols-2 gap-gutter mb-lg">
+<div class="bg-surface-container-low p-md rounded-2xl flex flex-col gap-xs border border-outline-variant/10">
+<div class="flex items-center gap-xs text-primary">
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+<span class="font-label-md text-label-md">Avg. Margin</span>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">32.4%</span>
+<span class="font-label-md text-label-md text-primary">+2.1% vs last month</span>
+</div>
+<div class="bg-surface-container-low p-md rounded-2xl flex flex-col gap-xs border border-outline-variant/10">
+<div class="flex items-center gap-xs text-tertiary">
+<span class="material-symbols-outlined text-[18px]">account_balance</span>
+<span class="font-label-md text-label-md">Break-even</span>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">$14.2k</span>
+<span class="font-label-md text-label-md text-on-surface-variant">82% of monthly goal</span>
+</div>
+</div>
+<!-- Profit Margin Analysis -->
+<div class="px-margin mb-lg">
+<div class="bg-surface-container-lowest p-lg rounded-3xl shadow-sm border border-outline-variant/20">
+<div class="flex items-center justify-between mb-md">
+<div class="flex flex-col">
+<h3 class="font-title-lg text-title-lg text-on-surface">Profit Margin Trend</h3>
+<p class="font-label-md text-on-surface-variant font-normal">Percentage of revenue retained as profit</p>
+</div>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">info</span>
+</button>
+</div>
+<!-- Legend -->
+<div class="flex items-center gap-md mb-lg">
+<div class="flex items-center gap-1">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-[10px] font-label-md text-on-surface-variant">Actual Margin</span>
+</div>
+<div class="flex items-center gap-1">
+<div class="w-3 h-3 rounded-full bg-primary/20"></div>
+<span class="text-[10px] font-label-md text-on-surface-variant">Target Zone</span>
+</div>
+</div>
+<div class="h-48 w-full relative mb-md">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 400 150">
+<defs>
+<lineargradient id="marginGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#5140b3" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#5140b3" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Target area background -->
+<rect fill="#5140b3" fill-opacity="0.05" height="40" width="400" x="0" y="40"></rect>
+<path d="M0,120 Q50,110 100,80 T200,60 T300,90 T400,40 L400,150 L0,150 Z" fill="url(#marginGradient)"></path>
+<path d="M0,120 Q50,110 100,80 T200,60 T300,90 T400,40" fill="none" stroke="#5140b3" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="400" cy="40" fill="#5140b3" r="5" stroke="white" stroke-width="2"></circle>
+</svg>
+<div class="absolute top-4 right-0 bg-primary text-on-primary px-sm py-xs rounded-lg text-[10px] font-bold shadow-sm">Current: 32.4%</div>
+<!-- Axis Labels -->
+<div class="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-[10px] text-on-surface-variant/40 pointer-events-none">
+<span>40%</span>
+<span>20%</span>
+<span>0%</span>
+</div>
+</div>
+<div class="flex justify-between px-2">
+<span class="font-label-md text-on-surface-variant">Sep 01</span>
+<span class="font-label-md text-on-surface-variant">Sep 08</span>
+<span class="font-label-md text-on-surface-variant">Sep 15</span>
+<span class="font-label-md text-on-surface-variant">Today</span>
+</div>
+</div>
+</div>
+<!-- Sales Forecasting -->
+<div class="px-margin mb-lg">
+<div class="bg-surface-container-low p-lg rounded-3xl border border-outline-variant/10">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md">Projected Sales Performance</h3>
+<div class="flex items-end gap-2 h-32 mb-lg">
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[40%] transition-all duration-700"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[60%] transition-all duration-700"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[55%] transition-all duration-700"></div>
+<div class="flex-1 bg-primary rounded-t-lg h-[85%] relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[10px] px-2 py-1 rounded whitespace-nowrap">Current</div>
+</div>
+<div class="flex-1 bg-tertiary-container/40 border-2 border-dashed border-tertiary rounded-t-lg h-[95%]"></div>
+</div>
+<div class="flex items-center gap-md p-md bg-surface-container-highest rounded-xl">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Target: <span class="font-bold">$18,500</span></span>
+<span class="font-label-md text-label-md text-on-surface-variant">Forecast suggests hit by Oct 24th</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Top Selling Products -->
+<div class="px-margin mb-xl">
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-title-lg text-title-lg text-on-surface">Bestselling Products</h3>
+<button class="text-primary font-label-md active:opacity-60 transition-opacity">See all 42 items</button>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Item 1 - Optimized for Tapping -->
+<button class="flex items-center gap-md p-md bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10 active:bg-surface-container-low transition-all text-left w-full group">
+<div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy7DitWZ09yoDDaApi2M1Tdoscy6TjqcKvGQv0dhiRCTrB5OeatbD8FZCFSC8qZ6sGLKRyp7wlb37BXXW_CzdPGrYSAWjtV03x2Mb4Ci4nHbol3NMxUQxEMDmTnHrLE06r0sqQj1PKHydjZGLl5JQPLE94XoIDIjrtMi4M0gLSUutBx2vQpQx2AZf-2W2N7YMxEOk29YS7mn7eAJwgd0cHpZTC5LQ30XiK4b4PZrg6pDphiqkdLuAKdWboNSnAWN7ATTgdQSwWiAo"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-title-lg text-body-lg text-on-surface truncate group-active:text-primary">Zenith Keyboard</p>
+<p class="font-label-md text-label-md text-on-surface-variant">124 sold this month</p>
+</div>
+<div class="flex flex-col items-end gap-2">
+<div class="w-16 h-8">
+<svg class="w-full h-full" viewbox="0 0 100 40">
+<path d="M0,35 Q20,30 40,10 T70,15 T100,5" fill="none" stroke="#5140b3" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px] opacity-0 group-active:opacity-100 transition-opacity">chevron_right</span>
+</div>
+</button>
+<!-- Item 2 -->
+<button class="flex items-center gap-md p-md bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10 active:bg-surface-container-low transition-all text-left w-full group">
+<div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjyXvIvtqZqRGjsYC_bBPR4kbZUapyW2N0jLbfu7QIZCERM3cJmCrwcew22YJA5eyYRCH0hCm4qEcHfzJrUzinou6qkVQYqjHdieAYLOoVCr3QgeV2GBsuAzyLLVGmOEmqeS1XgcMciJABxQ9dGy1M54t8UQ5YvH-95wNfsFt0qNaS5xXXZNLKuDzqvD4-cDozQ_cIK0GamF7TDwtyyHmwTjwZtPx-HhkF3se7cQ_pB6cxBQSv7qNg5R6wIRjsXA1aP3fsd2HOP2A"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-title-lg text-body-lg text-on-surface truncate group-active:text-primary">Lumina Vessel</p>
+<p class="font-label-md text-label-md text-on-surface-variant">98 sold this month</p>
+</div>
+<div class="flex flex-col items-end gap-2">
+<div class="w-16 h-8">
+<svg class="w-full h-full" viewbox="0 0 100 40">
+<path d="M0,38 Q20,35 40,30 T70,10 T100,12" fill="none" stroke="#763792" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px] opacity-0 group-active:opacity-100 transition-opacity">chevron_right</span>
+</div>
+</button>
+<!-- Item 3 -->
+<button class="flex items-center gap-md p-md bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10 active:bg-surface-container-low transition-all text-left w-full group">
+<div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUaazrRNDL2tAoUmzO9zefJkPC1Q66u6xidxhM9Bazr544REOOa6i3nsMHnFzLovjJmKBIVwKAMBlJ4SYW2QJP1fvUQAkZ66Zodz_6v0TGft_qgv3RI53jFutJI2V_h4FatOxVc_lhffxll1ki5UWCkp_KxLIRp3DuzTBtN_4nNVGy1ZZfkoduHHnb0b9n4UNdrcrqzVhgRHGB9Hjika76B90bXM_zzPJts52mtW3WRAyVT4AftKf3OlCZDEHd0C7j8SmIjUOoYcA"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-title-lg text-body-lg text-on-surface truncate group-active:text-primary">Aura Headphones</p>
+<p class="font-label-md text-label-md text-on-surface-variant">82 sold this month</p>
+</div>
+<div class="flex flex-col items-end gap-2">
+<div class="w-16 h-8">
+<svg class="w-full h-full" viewbox="0 0 100 40">
+<path d="M0,20 Q20,25 40,22 T70,30 T100,10" fill="none" stroke="#005fac" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px] opacity-0 group-active:opacity-100 transition-opacity">chevron_right</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Descriptive Insight Section -->
+<div class="px-margin mb-xl">
+<div class="relative overflow-hidden bg-tertiary p-lg rounded-3xl text-on-tertiary shadow-md">
+<div class="relative z-10 flex flex-col gap-xs">
+<h4 class="font-headline-md">Inventory Warning: Potential Stockouts</h4>
+<p class="font-body-md opacity-90">Your current inventory turnover is 15% higher than the industry average. At this rate, 'Top Sellers' like the Zenith Keyboard will be out of stock before the Q4 holiday peak. Consider restocking by Sept 30th.</p>
+</div>
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="absolute right-4 top-4 opacity-20">
+<span class="material-symbols-outlined text-[64px]">warning</span>
+</div>
+</div>
+</div>
+<div class="h-24"></div>
+</div>
+</main>
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/80 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]" data-active-classes="text-primary">
+<div class="flex justify-around items-center h-16 px-xs">
+<a class="flex flex-col items-center justify-center gap-1 flex-1 text-on-surface-variant transition-colors" data-path="dashboard" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="font-label-md text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 flex-1 text-on-surface-variant transition-colors" data-path="transactions" href="#">
+<span class="material-symbols-outlined text-[24px]">account_balance_wallet</span>
+<span class="font-label-md text-[10px]">History</span>
+</a>
+<a aria-current="page" class="flex flex-col items-center justify-center gap-1 flex-1 transition-colors text-primary" data-path="reports" href="#">
+<span class="material-symbols-outlined text-[24px]">analytics</span>
+<span class="font-label-md text-[10px]">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 flex-1 text-on-surface-variant transition-colors" data-path="insights" href="#">
+<span class="material-symbols-outlined text-[24px]">trending_up</span>
+<span class="font-label-md text-[10px]">Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 flex-1 text-on-surface-variant transition-colors" data-path="user-profile" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="font-label-md text-[10px]">Profile</span>
+</a>
+</div>
+</nav>
+<script>
+    // Micro-interaction for Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    let isDark = false;
+
+    themeToggle.addEventListener('click', () => {
+      isDark = !isDark;
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        themeIcon.innerText = 'light_mode';
+        themeToggle.classList.replace('bg-surface-container-high', 'bg-primary');
+        themeToggle.classList.replace('text-primary', 'text-on-primary');
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeIcon.innerText = 'dark_mode';
+        themeToggle.classList.replace('bg-primary', 'bg-surface-container-high');
+        themeToggle.classList.replace('text-on-primary', 'text-primary');
+      }
+      
+      // Haptic feedback simulation
+      themeToggle.style.transform = 'scale(0.9)';
+      setTimeout(() => themeToggle.style.transform = 'scale(1)', 100);
+    });
+
+    // Animate Bar Charts on Load
+    window.addEventListener('DOMContentLoaded', () => {
+      const bars = document.querySelectorAll('.bg-primary\\/20, .bg-primary, .bg-tertiary-container\\/40');
+      bars.forEach((bar, index) => {
+        const height = bar.style.height;
+        bar.style.height = '0';
+        setTimeout(() => {
+          bar.style.height = height;
+        }, 100 * index);
+      });
+    });
+  </script>
+</body></html>
