@@ -25,3 +25,42 @@
 body {
   min-height: max(884px, 100dvh);
 }
+
+@layer utilities {
+  @keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+
+  .animate-entrance-logo { animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .animate-entrance-text { opacity: 0; animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
+  .animate-entrance-field-1 { opacity: 0; animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
+  .animate-entrance-field-2 { opacity: 0; animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; }
+  .animate-entrance-button { opacity: 0; animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+  .animate-entrance-social { opacity: 0; animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; }
+  .animate-entrance-footer { opacity: 0; animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; }
+  .wiggle { animation: wiggle 0.2s ease-in-out 0s 2; }
+}
+
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    .animate-entrance-logo, .animate-entrance-text, .animate-entrance-field-1, .animate-entrance-field-2, 
+    .animate-entrance-button, .animate-entrance-social, .animate-entrance-footer {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .wiggle { animation: none !important; }
+  }
+}

@@ -4,7 +4,7 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 const navItems = [
   { path: '/dashboard', icon: 'dashboard', label: 'Home' },
   { path: '/transactions', icon: 'account_balance_wallet', label: 'History' },
-  { path: '/reports', icon: 'analytics', label: 'Reports' },
+  { path: '/products', icon: 'shopping_bag', label: 'Products' },
   { path: '/insights', icon: 'trending_up', label: 'Insights' },
   { path: '/profile', icon: 'person', label: 'Profile' },
 ];
