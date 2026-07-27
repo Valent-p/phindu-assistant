@@ -1,5 +1,6 @@
-import React from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import { api, getAuthToken } from '../../core/api';
 
 const navItems = [
   { path: '/dashboard', icon: 'dashboard', label: 'Home' },
@@ -11,6 +12,42 @@ const navItems = [
 
 export default function Layout() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [business, setBusiness] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      if (!getAuthToken()) {
+        navigate('/login');
+        return;
+      }
+      try {
+        const userData = await api.get('/users/me');
+        setUser(userData);
+        
+        const businessesData = await api.get('/businesses/');
+        if (businessesData && businessesData.length > 0) {
+          setBusiness(businessesData[0]);
+        }
+      } catch (err) {
+        console.error("Failed to load user data", err);
+        // Automatically handled by API auto-logout on 401
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, [navigate]);
+
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-background">
+        <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -24,13 +61,13 @@ export default function Layout() {
             <span className="hidden sm:block font-label-md text-label-md text-on-surface-variant capitalize">
               {location.pathname.substring(1)}
             </span>
-            <img alt="Profile" className="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB039kMpdgxwl6x-OM01tS-um73R-akk4lC_vNmv-uu-NFTSzAS5V-UIs34EJEFZbi3OWHzaBqZgc0lrq8nQl11-_7A4w66n81Ju5VTopp36Flv9jimmoVh8-6qZt5u3yC51WhUF1PIqBf5CGWR4A1a89Nd9ysAS9YZ5QxdUeoP3hqBIW2p-CAcwalnXgeLUl8CdvYczGPueW51k0JBK9Q0chGSDZDFNJa6cQrvAPeVyTKn3aOUENdYTTEOblod21K5ggEPsY1bQyQ" />
+            <img alt="Profile" className="w-8 h-8 rounded-full object-cover" src={user?.avatar_url || "https://ui-avatars.com/api/?name=" + user?.username} />
           </div>
         </div>
       </header>
 
       <main className="relative w-full pt-16 bg-background">
-        <Outlet />
+        <Outlet context={{ user, business, setUser, setBusiness }} />
         <div className="h-24"></div>
       </main>
 

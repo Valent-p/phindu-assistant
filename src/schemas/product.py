@@ -10,6 +10,7 @@ class ProductCreate(BaseModel):
     cost_price: float = 0.0
     unit: str | None = None
     stock_quantity: int | None = None
+    image_url: str | None = None
 
 
 class ProductUpdate(BaseModel):
@@ -20,6 +21,7 @@ class ProductUpdate(BaseModel):
     unit: str | None = None
     stock_quantity: int | None = None
     is_active: bool | None = None
+    image_url: str | None = None
 
 
 class ProductResponse(BaseModel):
@@ -31,6 +33,7 @@ class ProductResponse(BaseModel):
     cost_price: float
     unit: str | None = None
     stock_quantity: int | None = None
+    image_url: str | None = None
     is_active: bool
     created_at: datetime
     updated_at: datetime

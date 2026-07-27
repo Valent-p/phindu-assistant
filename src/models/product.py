@@ -23,6 +23,7 @@ class Product(Base):
     # Inventory & Units
     unit: Mapped[str | None] = mapped_column(String(50))  # e.g., kg, piece, litre
     stock_quantity: Mapped[int | None] = mapped_column(Integer)
+    image_url: Mapped[str | None] = mapped_column(String(500))
 
     # Status
     is_active: Mapped[bool] = mapped_column(Boolean, server_default="1")

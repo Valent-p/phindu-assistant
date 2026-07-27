@@ -9,6 +9,7 @@ import AddProduct from './pages/AddProduct';
 import UserProfile from './pages/UserProfile';
 import Reports from './pages/Reports';
 import Layout from './components/layout/Layout';
+import CreateBusiness from './pages/CreateBusiness';
 import './index.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/add-product" element={<AddProduct />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/reports" element={<Reports />} />
+            <Route path="/create-business" element={<CreateBusiness />} />
             {/* Additional routes will be added here */}
           </Route>
 

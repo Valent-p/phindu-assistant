@@ -1,13 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useOutletContext, useNavigate } from 'react-router-dom';
+import { api } from '../core/api';
 
 export default function Dashboard() {
+  const { user, business } = useOutletContext();
+  const navigate = useNavigate();
+  const [kpi, setKpi] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadDashboard() {
+      if (!business) {
+        setLoading(false);
+        return;
+      }
+      try {
+        const data = await api.get(`/analytics/${business.id}/summary`);
+        setKpi(data);
+      } catch (err) {
+        console.error("Error loading KPIs", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadDashboard();
+  }, [business]);
+
+  if (loading) {
+    return <div className="p-margin animate-pulse text-on-surface-variant">Loading dashboard...</div>;
+  }
+
+  if (!business) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[70vh] px-margin text-center">
+        <span className="material-symbols-outlined text-[64px] text-primary/50 mb-md">storefront</span>
+        <h2 className="font-headline-md text-headline-md text-on-background mb-sm">Let's set up your business</h2>
+        <p className="font-body-md text-body-md text-on-surface-variant mb-lg">You need to create a business profile before you can start tracking sales and insights.</p>
+        <button onClick={() => navigate('/profile')} className="bg-primary text-on-primary px-lg py-sm rounded-xl font-label-md">Go to Profile</button>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col w-full">
       {/* Dynamic Welcome Header */}
       <div className="px-margin py-md flex justify-between items-end">
         <div className="flex flex-col">
           <span className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Good Morning</span>
-          <h1 className="font-headline-lg-mobile text-headline-lg-mobile text-on-background">Welcome back, Sarah</h1>
+          <h1 className="font-headline-lg-mobile text-headline-lg-mobile text-on-background">Welcome back, {user?.first_name || user?.username}</h1>
         </div>
         <div className="relative">
           <div className="absolute -top-1 -right-1 w-3 h-3 bg-error rounded-full border-2 border-background"></div>
@@ -22,12 +62,11 @@ export default function Dashboard() {
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-tertiary/20 rounded-full -ml-12 -mb-12 blur-xl"></div>
           <div className="relative z-10 flex flex-col gap-xs">
             <div className="flex items-center gap-sm">
-              <span className="font-label-md text-label-md text-on-primary/80 uppercase">Total Net Balance</span>
+              <span className="font-label-md text-label-md text-on-primary/80 uppercase">Total Net Profit</span>
               <span className="material-symbols-outlined text-[16px] text-on-primary/60">visibility</span>
             </div>
             <div className="flex items-baseline gap-xs">
-              <span className="font-display-lg text-display-lg text-on-primary">MWK 128,400</span>
-              <span className="font-title-lg text-title-lg text-on-primary/70">.50</span>
+              <span className="font-display-lg text-display-lg text-on-primary">{business.currency} {kpi?.net_profit.toLocaleString() || "0"}</span>
             </div>
             <div className="mt-md flex items-center gap-sm bg-white/15 w-fit px-sm py-1 rounded-full backdrop-blur-md">
               <span className="material-symbols-outlined text-[14px] text-on-primary" style={{ fontVariationSettings: "'FILL' 1" }}>trending_up</span>
@@ -83,8 +122,8 @@ export default function Dashboard() {
                 </div>
               </div>
               <div className="flex flex-col mt-xs">
-                <span className="font-label-md text-label-md text-on-surface-variant">Monthly Sales</span>
-                <span className="font-headline-md text-headline-md text-on-background">MWK 128,400</span>
+                <span className="font-label-md text-label-md text-on-surface-variant">Total Sales Revenue</span>
+                <span className="font-headline-md text-headline-md text-on-background">{business.currency} {kpi?.total_revenue.toLocaleString() || "0"}</span>
               </div>
             </div>
 
@@ -100,8 +139,8 @@ export default function Dashboard() {
                 </svg>
               </div>
               <div className="flex flex-col mt-xs">
-                <span className="font-label-md text-label-md text-on-surface-variant">Profit Margin</span>
-                <span className="font-headline-md text-headline-md text-on-background">32.4%</span>
+                <span className="font-label-md text-label-md text-on-surface-variant">Gross Profit Margin</span>
+                <span className="font-headline-md text-headline-md text-on-background">{kpi?.average_margin_percent.toFixed(1) || "0"}%</span>
               </div>
             </div>
           </div>

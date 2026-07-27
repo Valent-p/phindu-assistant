@@ -22,6 +22,7 @@ async def create_product(
         cost_price=payload.cost_price,
         unit=payload.unit,
         stock_quantity=payload.stock_quantity,
+        image_url=payload.image_url,
     )
     db.add(product)
     await db.commit()

@@ -1,23 +1,48 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { api, setAuthToken } from './core/api';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !password) return;
+    if (!email || !password || (isRegister && !username)) return;
     
     setIsLoading(true);
-    // Simulate network request
-    setTimeout(() => {
+    setErrorMsg('');
+    try {
+      if (isRegister) {
+        // Register
+        const res = await api.post('/auth/register', { username, email, password });
+        setAuthToken(res.access_token);
+        navigate('/dashboard');
+      } else {
+        // Login - FastAPI OAuth2 expects form-urlencoded
+        const params = new URLSearchParams();
+        params.append('username', email); // our frontend uses email as the username for login input
+        params.append('password', password);
+        
+        const res = await api.post('/auth/login', params, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        });
+        setAuthToken(res.access_token);
+        navigate('/dashboard');
+      }
+    } catch (err) {
+      setErrorMsg(err.message);
+    } finally {
       setIsLoading(false);
-      navigate('/dashboard');
-    }, 1500);
+    }
   };
 
   return (
@@ -46,7 +71,30 @@ export default function Login() {
 
       {/* Login Form */}
       <form onSubmit={handleSubmit} className="flex flex-col space-y-lg relative z-10">
+        {errorMsg && (
+          <div className="bg-error/10 text-error p-3 rounded-lg text-sm text-center">
+            {errorMsg}
+          </div>
+        )}
         <div className="space-y-md">
+          {/* Username Input (Only for register) */}
+          {isRegister && (
+            <div className="space-y-sm animate-entrance-field-1">
+              <label className="font-label-md text-label-md text-on-surface-variant px-1" htmlFor="username">Username</label>
+              <div className="relative custom-input rounded-xl transition-all duration-200 border-2 border-transparent">
+                <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">person</span>
+                <input 
+                  className="w-full h-14 pl-12 pr-4 bg-surface-container-low rounded-[inherit] font-body-md text-body-md text-on-surface outline-none transition-all border-none focus:ring-0 focus:border-primary focus:border-2" 
+                  id="username" 
+                  placeholder="johndoe" 
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+          
           {/* Email Input */}
           <div className="space-y-sm animate-entrance-field-1">
             <label className="font-label-md text-label-md text-on-surface-variant px-1" htmlFor="email">Email Address</label>
@@ -107,7 +155,7 @@ export default function Login() {
               </>
             ) : (
               <>
-                <span>Sign In</span>
+                <span>{isRegister ? 'Create Account' : 'Sign In'}</span>
                 <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
               </>
             )}
@@ -143,8 +191,14 @@ export default function Login() {
       {/* Footer Link */}
       <div className="pt-xl text-center animate-entrance-footer relative z-10">
         <p className="font-body-md text-body-md text-on-surface-variant">
-          Don't have an account?
-          <a className="text-primary font-title-lg ml-1 hover:underline underline-offset-4 transition-all duration-200" href="#">Create Account</a>
+          {isRegister ? 'Already have an account?' : "Don't have an account?"}
+          <button 
+            type="button" 
+            className="text-primary font-title-lg ml-1 hover:underline underline-offset-4 transition-all duration-200" 
+            onClick={() => setIsRegister(!isRegister)}
+          >
+            {isRegister ? 'Sign In' : 'Create Account'}
+          </button>
         </p>
       </div>
 

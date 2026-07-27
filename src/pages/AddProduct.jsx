@@ -1,33 +1,72 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import { api } from '../core/api';
 
 export default function AddProduct() {
+  const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  
+  // Form state
+  const [name, setName] = useState('');
+  const [sku, setSku] = useState('');
+  const [category, setCategory] = useState('electronics');
+  const [price, setPrice] = useState('');
+  const [costPrice, setCostPrice] = useState('');
+  const [stock, setStock] = useState('');
+  const [description, setDescription] = useState('');
+  
   const navigate = useNavigate();
+  const { business } = useOutletContext();
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      // In a real app we'd create an object URL or upload it.
-      // For now, we simulate a preview with a placeholder color/image.
-      setImagePreview('https://lh3.googleusercontent.com/aida-public/AB6AXuDLZXMfSChB7bilJmRW63U7FR22YcGkc0RtzTjxSambu1dQArEivVo79Pb9YMiaFOLU-9cQxGbr7tutePjO-rqnhLyKiNI_3y6A8T6EXR-2OlHOU4afn9O0zyiNbIutFGAaDFD28_pRVreP9EEIVBTH46S6-JTBoDhT8TXu_V3xDr8gxPQvdc6D1eQF1VbsJA0T7yzaO5UjrCyp10DKWl3MUJqCvgBMrpMC51BCUNKThMzrnE63Hprxo_jSUdLCB2jYsfUluhF-bUQ');
+      const file = e.target.files[0];
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file));
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!business) {
+      alert("No active business selected.");
+      return;
+    }
+    
     setIsSubmitting(true);
     
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setShowToast(true);
+    try {
+      let imageUrl = null;
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append('file', imageFile);
+        const uploadRes = await api.post('/uploads/', formData);
+        imageUrl = uploadRes.url;
+      }
       
+      const payload = {
+        name,
+        description: description || `Product SKU: ${sku}, Category: ${category}`,
+        price: parseFloat(price),
+        cost_price: costPrice ? parseFloat(costPrice) : 0,
+        stock_quantity: stock ? parseInt(stock, 10) : 0,
+        image_url: imageUrl,
+      };
+      
+      await api.post(`/businesses/${business.id}/products/`, payload);
+      
+      setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
         navigate('/products');
       }, 2000);
-    }, 1200);
+    } catch (err) {
+      alert(err.message || 'Error creating product');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -72,17 +111,17 @@ export default function AddProduct() {
         <div className="bg-surface-container-lowest rounded-xl p-md shadow-sm flex flex-col gap-md">
           <div className="flex flex-col gap-sm">
             <label className="font-label-md text-label-md text-on-surface-variant" htmlFor="prod_name">Product Name*</label>
-            <input className="w-full h-12 px-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none focus:ring-2 focus:ring-primary/20 border-transparent transition-all" id="prod_name" placeholder="e.g. Wireless Noise Cancelling Headphones" required type="text" />
+            <input className="w-full h-12 px-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none focus:ring-2 focus:ring-primary/20 border-transparent transition-all" id="prod_name" placeholder="e.g. Wireless Noise Cancelling Headphones" required type="text" value={name} onChange={e => setName(e.target.value)} />
           </div>
           <div className="grid grid-cols-2 gap-md">
             <div className="flex flex-col gap-sm">
               <label className="font-label-md text-label-md text-on-surface-variant" htmlFor="sku">SKU*</label>
-              <input className="w-full h-12 px-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none focus:ring-2 focus:ring-primary/20 border-transparent transition-all" id="sku" placeholder="PH-10293" required type="text" />
+              <input className="w-full h-12 px-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none focus:ring-2 focus:ring-primary/20 border-transparent transition-all" id="sku" placeholder="PH-10293" required type="text" value={sku} onChange={e => setSku(e.target.value)} />
             </div>
             <div className="flex flex-col gap-sm">
               <label className="font-label-md text-label-md text-on-surface-variant" htmlFor="category">Category</label>
               <div className="relative">
-                <select className="w-full h-12 px-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none appearance-none focus:ring-2 focus:ring-primary/20" id="category">
+                <select className="w-full h-12 px-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none appearance-none focus:ring-2 focus:ring-primary/20" id="category" value={category} onChange={e => setCategory(e.target.value)}>
                   <option value="electronics">Electronics</option>
                   <option value="home-decor">Home Decor</option>
                   <option value="accessories">Accessories</option>
@@ -100,21 +139,28 @@ export default function AddProduct() {
             <div className="flex flex-col gap-sm">
               <label className="font-label-md text-label-md text-on-surface-variant" htmlFor="price">Price*</label>
               <div className="relative">
-                <span className="absolute left-4 top-3 text-on-surface-variant font-body-md">$</span>
-                <input className="w-full h-12 pl-8 pr-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none focus:ring-2 focus:ring-primary/20 border-transparent transition-all" id="price" placeholder="0.00" required step="0.01" type="number" />
+                <span className="absolute left-4 top-3 text-on-surface-variant font-body-md">{business?.currency || '$'}</span>
+                <input className="w-full h-12 pl-12 pr-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none focus:ring-2 focus:ring-primary/20 border-transparent transition-all" id="price" placeholder="0.00" required step="0.01" type="number" value={price} onChange={e => setPrice(e.target.value)} />
               </div>
             </div>
             <div className="flex flex-col gap-sm">
-              <label className="font-label-md text-label-md text-on-surface-variant" htmlFor="stock">Initial Stock</label>
-              <input className="w-full h-12 px-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none focus:ring-2 focus:ring-primary/20 border-transparent transition-all" id="stock" placeholder="0" type="number" />
+              <label className="font-label-md text-label-md text-on-surface-variant" htmlFor="cost_price">Cost Price</label>
+              <div className="relative">
+                <span className="absolute left-4 top-3 text-on-surface-variant font-body-md">{business?.currency || '$'}</span>
+                <input className="w-full h-12 pl-12 pr-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none focus:ring-2 focus:ring-primary/20 border-transparent transition-all" id="cost_price" placeholder="0.00" step="0.01" type="number" value={costPrice} onChange={e => setCostPrice(e.target.value)} />
+              </div>
             </div>
+          </div>
+          <div className="flex flex-col gap-sm mt-2">
+            <label className="font-label-md text-label-md text-on-surface-variant" htmlFor="stock">Initial Stock</label>
+            <input className="w-full h-12 px-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none focus:ring-2 focus:ring-primary/20 border-transparent transition-all" id="stock" placeholder="0" type="number" value={stock} onChange={e => setStock(e.target.value)} />
           </div>
         </div>
 
         {/* Description Card */}
         <div className="bg-surface-container-lowest rounded-xl p-md shadow-sm flex flex-col gap-sm">
           <label className="font-label-md text-label-md text-on-surface-variant" htmlFor="description">Product Description</label>
-          <textarea className="w-full p-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none focus:ring-2 focus:ring-primary/20 border-transparent transition-all resize-none" id="description" placeholder="Describe the key features, materials, and benefits..." rows="4"></textarea>
+          <textarea className="w-full p-md rounded-lg bg-surface-container-low text-on-surface font-body-md outline-none focus:ring-2 focus:ring-primary/20 border-transparent transition-all resize-none" id="description" placeholder="Describe the key features, materials, and benefits..." rows="4" value={description} onChange={e => setDescription(e.target.value)}></textarea>
         </div>
 
         {/* Action Buttons */}
