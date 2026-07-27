@@ -22,8 +22,10 @@ if config.config_file_name is not None:
 # module is imported.
 # ---------------------------------------------------------------------------
 from src.models.base import Base  # noqa: E402
+from src.models.business import Business  # noqa: E402, F401
+from src.models.expense_record import ExpenseRecord  # noqa: E402, F401
 from src.models.product import Product  # noqa: E402, F401
-from src.models.product_instance import ProductInstance  # noqa: E402, F401
+from src.models.sale_record import SaleRecord  # noqa: E402, F401
 from src.models.user import User  # noqa: E402, F401
 
 target_metadata = Base.metadata

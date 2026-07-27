@@ -11,7 +11,7 @@ from ..core.security import (
     verify_password,
 )
 from ..models.user import User
-from ..schemas.user import Token, UserRegister
+from ..schemas.user import Token, UserRegister, UserUpdate
 from .database import get_db
 
 # 1. Define OAuth2 Scheme first
@@ -94,3 +94,22 @@ async def login(
 
     access_token = create_access_token(data={"sub": str(user.id)})
     return Token(access_token=access_token, token_type="bearer")
+
+
+async def update_profile(
+    user: User, payload: UserUpdate, db: AsyncSession
+) -> User:
+    update_data = payload.model_dump(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(user, key, value)
+    
+    db.add(user)
+    await db.commit()
+    await db.refresh(user)
+    return user
+
+
+async def get_by_username(username: str, db: AsyncSession) -> User | None:
+    stmt = select(User).where(User.username == username)
+    result = await db.execute(stmt)
+    return result.scalar_one_or_none()

@@ -1,63 +1,56 @@
+from datetime import date
+from typing import Any
+
 from pydantic import BaseModel
 
 
-class DashboardSummary(BaseModel):
-    net_balance: float
+class KPISummary(BaseModel):
     total_revenue: float
+    total_cogs: float
+    gross_profit: float
     total_expenses: float
-    profit_margin: float
-    monthly_sales: float
-    monthly_expenses: float
-    revenue_trend_pct: float
-    currency: str
+    net_profit: float
+    average_margin_percent: float
+
+
+class TimeSeriesDataPoint(BaseModel):
+    label: str  # e.g., '2023-01', 'Week 42'
+    revenue: float
+    cogs: float
+    profit: float
+
+
+class SalesOverTimeResponse(BaseModel):
+    labels: list[str]
+    datasets: list[dict[str, Any]]
 
 
 class TopProduct(BaseModel):
     product_id: int
     name: str
-    revenue: float
-    quantity_sold: int
-    category: str | None = None
-
-
-class CategoryMargin(BaseModel):
-    category: str
-    margin_pct: float
-    revenue: float
-
-
-class ReportsSummary(BaseModel):
-    avg_margin_pct: float
-    break_even_target: float
-    gross_revenue: float
-    total_expenses: float
-    top_products: list[TopProduct]
-    monthly_revenue: list[float]
-    currency: str
-
-
-class InsightCard(BaseModel):
-    title: str
-    description: str
-    action_label: str
-    severity: str  # info | warning | success
-
-
-class InsightsSummary(BaseModel):
+    total_quantity: int
     total_revenue: float
-    revenue_trend_pct: float
-    top_products: list[TopProduct]
-    category_margins: list[CategoryMargin]
-    ai_forecasts: list[InsightCard]
-    currency: str
+    total_profit: float
 
 
-class TransactionItem(BaseModel):
-    id: str
-    type: str  # income | expense
-    title: str
-    subtitle: str
+class ExpenseCategoryBreakdown(BaseModel):
+    category: str
     amount: float
-    date: str
-    icon: str
-    is_recurring: bool = False
+
+
+class BreakEvenAnalysis(BaseModel):
+    fixed_costs: float
+    variable_cost_ratio: float
+    break_even_revenue: float | None
+    current_revenue: float
+    status: str  # 'Profitable', 'Loss', 'Break-even'
+
+
+class ForecastDataPoint(BaseModel):
+    label: str
+    forecasted_revenue: float
+
+
+class ForecastResponse(BaseModel):
+    historical: list[TimeSeriesDataPoint]
+    forecast: list[ForecastDataPoint]

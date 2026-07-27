@@ -1,22 +1,27 @@
-# Functions to get or set product/product-instance data in the database
 from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..models.product import Product
-from ..models.product_instance import ProductInstance
 from ..models.user import User
-from ..schemas.product import ProductCreate, ProductInstanceCreate
+from ..schemas.product import ProductCreate, ProductUpdate
+from .business_repo import get_business
 
 
 async def create_product(
-    payload: ProductCreate, current_user: User, db: AsyncSession
+    business_id: int, payload: ProductCreate, current_user: User, db: AsyncSession
 ) -> Product:
+    # Verify business ownership
+    await get_business(business_id, current_user, db)
+
     product = Product(
-        user_id=current_user.id,
+        business_id=business_id,
         name=payload.name,
-        price=payload.price,
         description=payload.description,
+        price=payload.price,
+        cost_price=payload.cost_price,
+        unit=payload.unit,
+        stock_quantity=payload.stock_quantity,
     )
     db.add(product)
     await db.commit()
@@ -24,35 +29,38 @@ async def create_product(
     return product
 
 
-async def list_products(current_user: User, db: AsyncSession) -> list[Product]:
-    stmt = select(Product).where(Product.user_id == current_user.id)
+async def list_products(
+    business_id: int, current_user: User, db: AsyncSession
+) -> list[Product]:
+    # Verify business ownership
+    await get_business(business_id, current_user, db)
+
+    stmt = select(Product).where(Product.business_id == business_id)
     result = await db.execute(stmt)
     return list(result.scalars().all())
 
 
-async def create_product_instance(
-    payload: ProductInstanceCreate, current_user: User, db: AsyncSession
-) -> ProductInstance:
-    # Verify the referenced product exists and belongs to this user
-    stmt = select(Product).where(
-        Product.id == payload.product_id, Product.user_id == current_user.id
-    )
+async def update_product(
+    business_id: int, product_id: int, payload: ProductUpdate, current_user: User, db: AsyncSession
+) -> Product:
+    # Verify business ownership
+    await get_business(business_id, current_user, db)
+
+    stmt = select(Product).where(Product.id == product_id, Product.business_id == business_id)
     result = await db.execute(stmt)
     product = result.scalar_one_or_none()
+
     if not product:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Product not found or does not belong to you",
+            detail="Product not found in this business",
         )
 
-    instance = ProductInstance(
-        user_id=current_user.id,
-        product_id=payload.product_id,
-        quantity=payload.quantity,
-        price_override=payload.price_override,
-        is_debt=payload.is_debt,
-    )
-    db.add(instance)
+    update_data = payload.model_dump(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(product, key, value)
+        
+    db.add(product)
     await db.commit()
-    await db.refresh(instance)
-    return instance
+    await db.refresh(product)
+    return product

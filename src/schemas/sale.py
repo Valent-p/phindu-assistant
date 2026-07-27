@@ -1,12 +1,11 @@
 from datetime import date, datetime
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict
 
 
 class SaleCreate(BaseModel):
     product_id: int
-    quantity: int = Field(ge=1)
-    unit_price: float | None = None
+    quantity: int
     discount_amount: float = 0.0
     is_debt: bool = False
     sale_date: date | None = None
@@ -24,11 +23,12 @@ class SaleResponse(BaseModel):
     is_debt: bool
     sale_date: date
     notes: str | None = None
+    created_at: datetime
+    updated_at: datetime
+    
+    # Computed fields exposed from ORM model
     revenue: float
     cogs: float
     gross_profit: float
-    created_at: datetime
-    updated_at: datetime
-    product_name: str | None = None
 
     model_config = ConfigDict(from_attributes=True)

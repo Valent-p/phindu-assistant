@@ -20,4 +20,4 @@ opensimplex>=0.4.5
 
 pyrefly
 
-ruff
+ruffpython-dateutil==2.9.0.post0

@@ -3,20 +3,20 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .api.auth import router as auth_router
-from .api.product import router as product_router
-from .api.user import router as user_router
-from .api.transaction import router as transaction_router
 from .api.analytics import router as analytics_router
+from .api.auth import router as auth_router
 from .api.business import router as business_router
+from .api.expense import router as expense_router
+from .api.product import router as product_router
+from .api.sale import router as sale_router
+from .api.user import router as user_router
 from .db.database import engine
-from .models import base  # noqa: F401 — ensures all models are registered
-from .models.product import Product  # noqa: F401
-from .models.product_instance import ProductInstance  # noqa: F401
-from .models.user import User  # noqa: F401
-from .models.sale_record import SaleRecord  # noqa: F401
-from .models.expense_record import ExpenseRecord  # noqa: F401
+from .models import base  # noqa: F401
 from .models.business import Business  # noqa: F401
+from .models.expense_record import ExpenseRecord  # noqa: F401
+from .models.product import Product  # noqa: F401
+from .models.sale_record import SaleRecord  # noqa: F401
+from .models.user import User  # noqa: F401
 
 
 @asynccontextmanager
@@ -39,10 +39,11 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(user_router)
-app.include_router(product_router)
-app.include_router(transaction_router)
-app.include_router(analytics_router)
 app.include_router(business_router)
+app.include_router(product_router)
+app.include_router(sale_router)
+app.include_router(expense_router)
+app.include_router(analytics_router)
 
 
 @app.get("/")

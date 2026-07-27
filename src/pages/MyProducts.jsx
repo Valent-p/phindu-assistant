@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export default function MyProducts() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState('All Items');
-  const navigate = useNavigate();
+  const navigate = usMWKeNavigate();
 
   const tabs = ['All Items', 'Electronics', 'Home Decor', 'Apparel', 'Fitness'];
 
@@ -22,7 +22,7 @@ export default function MyProducts() {
     },
     {
       name: 'Lumina Vessel',
-      price: '$89.00',
+      price: 'MWK89,000.00',
       sku: 'LV-VES-02',
       category: 'Home Decor',
       stockStatus: 'Low Stock',
@@ -33,7 +33,7 @@ export default function MyProducts() {
     },
     {
       name: 'Aura Headphones',
-      price: '$299.00',
+      price: 'MWK299,000.00',
       sku: 'AR-WL-88',
       category: 'Electronics',
       stockStatus: 'Out of Stock',
@@ -44,7 +44,7 @@ export default function MyProducts() {
     },
     {
       name: 'Stellar Watch',
-      price: '$450.00',
+      price: 'MWK450,000.00',
       sku: 'ST-SW-01',
       category: 'Accessories',
       stockStatus: 'In Stock',
@@ -86,9 +86,9 @@ export default function MyProducts() {
         <div className="flex items-center gap-sm">
           <div className="relative flex-1">
             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
-            <input 
-              className="w-full bg-surface-container-lowest border-none rounded-xl py-3 pl-10 pr-4 font-body-md text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary/20 transition-all outline-none shadow-sm" 
-              placeholder="Search inventory..." 
+            <input
+              className="w-full bg-surface-container-lowest border-none rounded-xl py-3 pl-10 pr-4 font-body-md text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary/20 transition-all outline-none shadow-sm"
+              placeholder="Search inventory..."
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -101,7 +101,7 @@ export default function MyProducts() {
         {/* Category Tabs */}
         <div className="flex gap-sm overflow-x-auto pb-xs no-scrollbar">
           {tabs.map(tab => (
-            <button 
+            <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-5 py-2 rounded-full font-label-md whitespace-nowrap transition-colors ${activeTab === tab ? 'bg-primary text-on-primary shadow-md shadow-primary/20' : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high'}`}
@@ -150,7 +150,7 @@ export default function MyProducts() {
       </div>
 
       {/* Floating Action Button */}
-      <button 
+      <button
         onClick={() => navigate('/add-product')}
         className="fixed bottom-24 right-margin w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg shadow-primary/40 flex items-center justify-center z-40 active:scale-90 transition-transform"
       >

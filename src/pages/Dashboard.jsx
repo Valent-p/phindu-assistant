@@ -26,7 +26,7 @@ export default function Dashboard() {
               <span className="material-symbols-outlined text-[16px] text-on-primary/60">visibility</span>
             </div>
             <div className="flex items-baseline gap-xs">
-              <span className="font-display-lg text-display-lg text-on-primary">$12,840</span>
+              <span className="font-display-lg text-display-lg text-on-primary">MWK 128,400</span>
               <span className="font-title-lg text-title-lg text-on-primary/70">.50</span>
             </div>
             <div className="mt-md flex items-center gap-sm bg-white/15 w-fit px-sm py-1 rounded-full backdrop-blur-md">
@@ -84,7 +84,7 @@ export default function Dashboard() {
               </div>
               <div className="flex flex-col mt-xs">
                 <span className="font-label-md text-label-md text-on-surface-variant">Monthly Sales</span>
-                <span className="font-headline-md text-headline-md text-on-background">$4,230</span>
+                <span className="font-headline-md text-headline-md text-on-background">MWK 128,400</span>
               </div>
             </div>
 

@@ -1,12 +1,12 @@
 from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, EmailStr, HttpUrl
 
 
 class UserResponse(BaseModel):
     id: int
     username: str
-    email: str
+    email: EmailStr
     first_name: str | None = None
     last_name: str | None = None
     phone_number: str | None = None
@@ -21,22 +21,33 @@ class UserResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
 
-    # This tells Pydantic to read the data even if it's an SQLAlchemy ORM model
+    model_config = ConfigDict(from_attributes=True)
+
+
+class UserPublicProfile(BaseModel):
+    username: str
+    first_name: str | None = None
+    last_name: str | None = None
+    bio: str | None = None
+    avatar_url: str | None = None
+    created_at: datetime
+
     model_config = ConfigDict(from_attributes=True)
 
 
 class UserUpdate(BaseModel):
     first_name: str | None = None
     last_name: str | None = None
-    email: str | None = None
     phone_number: str | None = None
     bio: str | None = None
     avatar_url: str | None = None
+    is_public: bool | None = None
+    username: str | None = None
 
 
 class UserRegister(BaseModel):
     username: str
-    email: str
+    email: EmailStr
     password: str
 
 

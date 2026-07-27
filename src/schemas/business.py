@@ -8,6 +8,7 @@ class BusinessCreate(BaseModel):
     description: str | None = None
     industry: str | None = None
     currency: str = "MWK"
+    logo_url: str | None = None
 
 
 class BusinessUpdate(BaseModel):
@@ -16,6 +17,7 @@ class BusinessUpdate(BaseModel):
     industry: str | None = None
     currency: str | None = None
     logo_url: str | None = None
+    is_active: bool | None = None
 
 
 class BusinessResponse(BaseModel):
